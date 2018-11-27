@@ -1,0 +1,309 @@
+{
+  "theme": {
+    "name": "JewelryBoxTheme",
+    "styles": [
+      "yellow",
+      "blue",
+      "default",
+      "black",
+      "green",
+      "cyan",
+      "red",
+      "purple"
+    ],
+    "version": "2.6",
+    "sharedTheme": {
+      "isPortalSupport": true,
+      "useHeader": false,
+      "useLogo": false
+    },
+    "customStyles": {
+      "mainBackgroundColor": "#ffffff"
+    }
+  },
+  "portalUrl": "http://kartverket.maps.arcgis.com",
+  "appId": "",
+  "authorizedCrossOriginDomains": [],
+  "title": "SePlan",
+  "subtitle": "with Web AppBuilder for ArcGIS",
+  "keepAppState": false,
+  "logo": "images/logo.png",
+  "httpProxy": {
+    "useProxy": true,
+    "url": "https://localhost:3344/proxy.js"
+  },
+  "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
+  "links": [
+    {
+      "label": "ArcGIS Online",
+      "url": "//www.arcgis.com"
+    },
+    {
+      "label": "Planområde",
+      "url": "http://wms.geonorge.no/skwms1/wms.planregisterstatus?"
+    }
+  ],
+  "widgetOnScreen": {
+    "widgets": [
+      {
+        "uri": "themes/JewelryBoxTheme/widgets/HeaderController/Widget",
+        "position": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "height": 50,
+          "paddingRight": 0,
+          "zIndex": 999,
+          "relativeTo": "browser"
+        },
+        "version": "2.6",
+        "id": "themes_JewelryBoxTheme_widgets_HeaderController_Widget_15",
+        "url": "/webappbuilder/apps/8/themes/JewelryBoxTheme/widgets/HeaderController/",
+        "icon": "themes/JewelryBoxTheme/widgets/HeaderController/images/icon.png",
+        "name": "HeaderController"
+      },
+      {
+        "uri": "widgets/Search/Widget",
+        "position": {
+          "left": 51,
+          "top": 10,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_Search_Widget_16",
+        "url": "/webappbuilder/apps/8/widgets/Search/",
+        "icon": "widgets/Search/images/icon.png",
+        "name": "Search"
+      },
+      {
+        "uri": "widgets/ZoomSlider/Widget",
+        "position": {
+          "left": 10,
+          "top": 10,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_ZoomSlider_Widget_17",
+        "url": "/webappbuilder/apps/8/widgets/ZoomSlider/",
+        "icon": "widgets/ZoomSlider/images/icon.png",
+        "name": "ZoomSlider"
+      },
+      {
+        "uri": "widgets/Home/Widget",
+        "position": {
+          "left": 10,
+          "top": 85,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_Home_Widget_18",
+        "url": "/webappbuilder/apps/8/widgets/Home/",
+        "icon": "widgets/Home/images/icon.png",
+        "name": "Home"
+      },
+      {
+        "uri": "widgets/MyLocation/Widget",
+        "position": {
+          "left": 10,
+          "top": 123,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_MyLocation_Widget_19",
+        "url": "/webappbuilder/apps/8/widgets/MyLocation/",
+        "icon": "widgets/MyLocation/images/icon.png",
+        "name": "MyLocation"
+      },
+      {
+        "uri": "widgets/Navigate/Widget",
+        "position": {
+          "left": 10,
+          "top": 161,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_Navigate_Widget_20",
+        "url": "/webappbuilder/apps/8/widgets/Navigate/",
+        "icon": "widgets/Navigate/images/icon.png",
+        "name": "Navigate",
+        "visible": false
+      },
+      {
+        "uri": "widgets/Compass/Widget",
+        "position": {
+          "left": 10,
+          "top": 308,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_Compass_Widget_21",
+        "url": "/webappbuilder/apps/8/widgets/Compass/",
+        "icon": "widgets/Compass/images/icon.png",
+        "name": "Compass"
+      },
+      {
+        "uri": "widgets/FullScreen/Widget",
+        "position": {
+          "left": 10,
+          "top": 270,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_FullScreen_Widget_22",
+        "url": "/webappbuilder/apps/8/widgets/FullScreen/",
+        "icon": "widgets/FullScreen/images/icon.png",
+        "name": "FullScreen"
+      },
+      {
+        "uri": "widgets/Coordinate/Widget",
+        "position": {
+          "left": 0,
+          "bottom": 16,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_Coordinate_Widget_23",
+        "url": "/webappbuilder/apps/8/widgets/Coordinate/",
+        "icon": "widgets/Coordinate/images/icon.png",
+        "name": "Coordinate"
+      },
+      {
+        "uri": "widgets/Splash/Widget",
+        "visible": false,
+        "position": {
+          "relativeTo": "browser"
+        },
+        "version": "2.6",
+        "id": "widgets_Splash_Widget_24",
+        "url": "/webappbuilder/apps/8/widgets/Splash/",
+        "icon": "widgets/Splash/images/icon.png",
+        "name": "Splash"
+      },
+      {
+        "uri": "widgets/ToggleLayers/Widget",
+        "position": {
+          "left": 400,
+          "top": 10,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_ToggleLayers_Widget_25",
+        "url": "/webappbuilder/apps/8/widgets/ToggleLayers/",
+        "name": "ToggleLayers"
+      },
+      {
+        "uri": "widgets/ToggleZoom/Widget",
+        "position": {
+          "left": 10,
+          "top": 180,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_ToggleZoom_Widget_26",
+        "url": "/webappbuilder/apps/8/widgets/ToggleZoom/",
+        "name": "ToggleZoom",
+        "label": "ToggleZoom"
+      }
+    ],
+    "groups": [
+      {
+        "visible": false,
+        "panel": {
+          "uri": "themes/JewelryBoxTheme/panels/LDockablePanel/Panel",
+          "position": {
+            "left": 0,
+            "top": 50,
+            "bottom": 0,
+            "width": 360,
+            "relativeTo": "browser"
+          }
+        },
+        "maxWidgets": 1,
+        "id": "_14",
+        "widgets": [
+          {
+            "name": "About",
+            "version": "2.6",
+            "uri": "widgets/About/Widget",
+            "config": "configs/About/config_About.json",
+            "id": "widgets_About_Widget_28",
+            "url": "/webappbuilder/apps/8/widgets/About/"
+          }
+        ],
+        "label": "Group_0",
+        "icon": "widgets/About/images/icon.png"
+      }
+    ],
+    "panel": {
+      "uri": "jimu/OnScreenWidgetPanel",
+      "position": {
+        "relativeTo": "map"
+      }
+    }
+  },
+  "map": {
+    "3D": true,
+    "2D": false,
+    "position": {
+      "left": 0,
+      "top": 50,
+      "right": 0,
+      "bottom": 0
+    },
+    "itemId": "6784d0cb157f45119afaff46f9d1aa57",
+    "mapOptions": {},
+    "id": "map",
+    "portalUrl": "https://kartverket.maps.arcgis.com"
+  },
+  "widgetPool": {
+    "panel": {
+      "uri": "themes/JewelryBoxTheme/panels/FoldablePanel/Panel",
+      "position": {
+        "top": 5,
+        "right": 5,
+        "bottom": 5,
+        "zIndex": 5,
+        "relativeTo": "map"
+      }
+    },
+    "widgets": [
+      {
+        "name": "Legend",
+        "version": "2.6",
+        "icon": "configs\\Legend\\icon_Legend.png",
+        "uri": "widgets/Legend/Widget",
+        "index": 2,
+        "id": "widgets_Legend_Widget_29",
+        "url": "/webappbuilder/apps/8/widgets/Legend/"
+      },
+      {
+        "name": "BasemapGallery",
+        "version": "2.6",
+        "uri": "widgets/BasemapGallery/Widget",
+        "index": 4,
+        "id": "widgets_BasemapGallery_Widget_30",
+        "url": "/webappbuilder/apps/8/widgets/BasemapGallery/",
+        "icon": "configs\\BasemapGallery\\icon_BasemapGallery.png",
+        "config": null
+      }
+    ],
+    "groups": []
+  },
+  "loadingPage": {
+    "backgroundColor": "#ffffff",
+    "backgroundImage": {
+      "visible": false
+    },
+    "loadingGif": {
+      "visible": true,
+      "uri": "configs/loading/images/loading.gif",
+      "width": 450,
+      "height": 71
+    }
+  },
+  "wabVersion": "2.6",
+  "isTemplateApp": true,
+  "isWebTier": false,
+  "configWabVersion": "2.6",
+  "logoLink": "http://"
+}

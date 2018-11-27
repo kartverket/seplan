@@ -1,0 +1,36 @@
+.jimu-widget-togglezoom {
+	
+}
+
+.toggleZoomContainer {
+	
+}
+
+.toggleZoomButton {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #B2B2B2;
+	background-color: white;
+	font-size: large;
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.toggleZoomButton:hover {
+	opacity: 1.0;
+}
+
+.toggleZoomButton img {
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+}
+
+.zoomActive {
+	background-color: #DCDCDC;
+}
+
+.zoomInactive {
+	background-color: white;
+}

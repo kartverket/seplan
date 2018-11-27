@@ -1,0 +1,26 @@
+.jimu-widget-togglelayers {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #BDBDBD;
+	background-color: white;
+	font-size: large;
+}
+
+.toggleLayersContainer {
+	display: table-row;
+}
+
+.toggleLayersButton {
+	display: table-cell;
+	cursor: pointer;
+	padding: 5px;
+}
+
+.active {
+	background-color: #FE5000;
+	color: white;
+}
+
+.inactive {
+	background-color: white;
+}
