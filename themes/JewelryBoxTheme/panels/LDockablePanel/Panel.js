@@ -23,11 +23,13 @@ define(['dojo/_base/declare',
     'dojo/text!./Panel.html',
     'jimu/BaseWidgetPanel',
     'jimu/dijit/LoadingIndicator',
-    'jimu/utils'
+    'jimu/utils',
+    'jimu/WidgetManager'
   ],
   function(
     declare, lang, html, require, topic,
-    _TemplatedMixin, template, BaseWidgetPanel, LoadingIndicator, utils
+    _TemplatedMixin, template, BaseWidgetPanel, LoadingIndicator, utils,
+    WidgetManager
   ) {
     //jshint unused:false
     /****
@@ -130,6 +132,15 @@ define(['dojo/_base/declare',
         } else {
           this.panelManager.maximizePanel(this);
         }
+
+        // CUSTOM!!
+        
+        setTimeout(function(){
+          var toggleLayersWidget = WidgetManager.getInstance().getWidgetsByName("ToggleLayers")[0];
+          toggleLayersWidget.resizeButtons();
+        }, 1000)
+
+        // CUSTOM!!
       }
 
     });

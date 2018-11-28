@@ -1,5 +1,5 @@
-define(['dojo/_base/declare', 'jimu/BaseWidget', 'esri/core/watchUtils'],
-function(declare, BaseWidget, watchUtils) {
+define(['dojo/_base/declare', 'dojo/_base/lang', 'jimu/BaseWidget', 'esri/core/watchUtils'],
+function(declare, lang, BaseWidget, watchUtils) {
   //To create a widget, you need to derive from BaseWidget.
   return declare([BaseWidget], {
     //Please note that the widget depends on the 4.0 API
@@ -92,6 +92,11 @@ function(declare, BaseWidget, watchUtils) {
 
       this.initClickEvents();
       this.initZoomEvent();
+      this.initResizeEvent();
+
+      setTimeout(lang.hitch(this, function(){
+        this.resizeButtons();
+      }), 500);
 
       console.log('startup');
     },
@@ -200,6 +205,41 @@ function(declare, BaseWidget, watchUtils) {
         that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
         that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
       });
+    },
+
+    initResizeEvent: function() {
+      var that = this;
+      window.addEventListener('resize', function(event){
+        that.resizeButtons();
+      });
+    },
+
+    resizeButtons: function() {
+      var mapDOM = document.getElementsByClassName("esri-view-root")[0];
+      var width = parseInt(mapDOM.style.width.slice(0, -2));
+      var buttons = document.getElementsByClassName("toggleLayersButton");
+
+      if (width < 700) {
+        document.getElementsByClassName(this.baseClass)[0].style.fontSize = "small";
+        this.toggleLayersContainer.style.display = "block";
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].style.display = "block";
+        } 
+      }
+      else if (width < 850) {
+        document.getElementsByClassName(this.baseClass)[0].style.fontSize = "small";
+        this.toggleLayersContainer.style.display = "table-row";
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].style.display = "table-cell";
+        } 
+      }
+      else if (width >= 850) {
+        document.getElementsByClassName(this.baseClass)[0].style.fontSize = "large";
+        this.toggleLayersContainer.style.display = "table-row";
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].style.display = "table-cell";
+        } 
+      }
     },
 
     onOpen: function(){

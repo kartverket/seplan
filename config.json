@@ -182,7 +182,7 @@
       {
         "uri": "widgets/ToggleLayers/Widget",
         "position": {
-          "left": 400,
+          "right": 30,
           "top": 10,
           "relativeTo": "map"
         },
@@ -203,6 +203,32 @@
         "url": "/webappbuilder/apps/8/widgets/ToggleZoom/",
         "name": "ToggleZoom",
         "label": "ToggleZoom"
+      },
+      {
+        "version": "2.6",
+        "position": {
+          "left": 30,
+          "bottom": 45,
+          "relativeTo": "map"
+        },
+        "icon": "configs\\Legend\\icon_Legend.png",
+        "uri": "widgets/Legend/Widget",
+        "id": "widgets_Legend_Widget_29",
+        "url": "/webappbuilder/apps/8/widgets/Legend/",
+        "name": "Legend"
+      },
+      {
+        "version": "2.6",
+        "uri": "widgets/BasemapGallery/Widget",
+        "position": {
+          "left": 70,
+          "bottom": 45,
+          "relativeTo": "map"
+        },
+        "id": "widgets_BasemapGallery_Widget_30",
+        "url": "/webappbuilder/apps/8/widgets/BasemapGallery/",
+        "icon": "configs\\BasemapGallery\\icon_BasemapGallery.png",
+        "name": "BasemapGallery"
       }
     ],
     "groups": [
@@ -267,25 +293,7 @@
       }
     },
     "widgets": [
-      {
-        "name": "Legend",
-        "version": "2.6",
-        "icon": "configs\\Legend\\icon_Legend.png",
-        "uri": "widgets/Legend/Widget",
-        "index": 2,
-        "id": "widgets_Legend_Widget_29",
-        "url": "/webappbuilder/apps/8/widgets/Legend/"
-      },
-      {
-        "name": "BasemapGallery",
-        "version": "2.6",
-        "uri": "widgets/BasemapGallery/Widget",
-        "index": 4,
-        "id": "widgets_BasemapGallery_Widget_30",
-        "url": "/webappbuilder/apps/8/widgets/BasemapGallery/",
-        "icon": "configs\\BasemapGallery\\icon_BasemapGallery.png",
-        "config": null
-      }
+      
     ],
     "groups": []
   },
