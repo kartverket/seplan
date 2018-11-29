@@ -83,10 +83,10 @@ function(declare, lang, BaseWidget, watchUtils) {
           active: false
         }
       };
-      
-      this.toggleStatusPlanRegister.innerHTML = "Status planregister";
-      this.toggleReguleringsplaner.innerHTML = "Reguleringsplaner";
-      this.toggleKommuneplaner.innerHTML = "Kommuneplaner";
+      console.log(this);
+      this.toggleStatusPlanRegister.innerHTML = this.nls.root.statusPlanregister;
+      this.toggleReguleringsplaner.innerHTML = this.nls.root.reguleringsplaner;
+      this.toggleKommuneplaner.innerHTML = this.nls.root.kommuneplaner;
 
       this.changeCssClasses(this.toggleReguleringsplaner);
 
