@@ -25,6 +25,7 @@ function(declare, lang, BaseWidget, watchUtils) {
         statusPlanregister: "statusPlanregister",
         planRegisterStatus: "planRegisterStatus",
         planOmraade: "planOmraade",
+        kpOmraade: "kpOmraade",
         detaljRegulering: "detaljRegulering",
         omraadeRegulering: "omraadeRegulering",
         bebyggelsesPlan: "bebyggelsesPlan",
@@ -40,6 +41,10 @@ function(declare, lang, BaseWidget, watchUtils) {
         planOmraade: {
           ref: this.sceneView.map.layers.items[1],
           name: this.layerNames.planOmraade
+        },
+        kpOmraade: {
+          ref: this.sceneView.map.layers.items[2],
+          name: this.layerNames.kpOmraade
         }
       }
 
@@ -83,7 +88,7 @@ function(declare, lang, BaseWidget, watchUtils) {
           active: false
         }
       };
-      console.log(this);
+      console.log(this.sceneView.map.layers);
       this.toggleStatusPlanRegister.innerHTML = this.nls.root.statusPlanregister;
       this.toggleReguleringsplaner.innerHTML = this.nls.root.reguleringsplaner;
       this.toggleKommuneplaner.innerHTML = this.nls.root.kommuneplaner;
@@ -159,6 +164,15 @@ function(declare, lang, BaseWidget, watchUtils) {
       }
     },
 
+    showAndHideKpOmraade: function(currentZoomLevel) {
+      for (var layerKey in this.toggleLayers) {
+        var layer = this.toggleLayers[layerKey];
+        if (layer.name === this.layerNames.dekningKommuneplaner) {
+          this.parentLayers.kpOmraade.ref.visible = (currentZoomLevel < 700000 && layer.active);
+        }
+      }
+    },
+
     changeCssClasses: function(clickedButton) {
       this.toggleStatusPlanRegister.classList.add("inactive");
       this.toggleStatusPlanRegister.classList.remove("active");
@@ -179,6 +193,7 @@ function(declare, lang, BaseWidget, watchUtils) {
         that.toggleLayers.statusPlanregister.active = true;
         that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
         that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
+        that.showAndHideKpOmraade(that.sceneView.scale);
       }
       this.toggleReguleringsplaner.onclick = function() {
         that.changeCssClasses(that.toggleReguleringsplaner);
@@ -187,6 +202,7 @@ function(declare, lang, BaseWidget, watchUtils) {
         that.toggleLayers.statusPlanregister.active = false;
         that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
         that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
+        that.showAndHideKpOmraade(that.sceneView.scale);
       }
       this.toggleKommuneplaner.onclick = function() {
         that.changeCssClasses(that.toggleKommuneplaner);
@@ -195,6 +211,7 @@ function(declare, lang, BaseWidget, watchUtils) {
         that.toggleLayers.statusPlanregister.active = false;
         that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
         that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
+        that.showAndHideKpOmraade(that.sceneView.scale);
       }
     },
 
@@ -204,6 +221,7 @@ function(declare, lang, BaseWidget, watchUtils) {
       watchUtils.whenTrue(this.sceneView, "stationary", function() {
         that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
         that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
+        that.showAndHideKpOmraade(that.sceneView.scale);
       });
     },
 
