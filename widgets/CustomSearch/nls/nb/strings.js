@@ -3,7 +3,10 @@
     _widgetLabel: "Demo",
     label1: "Jeg er en demowidget.",
     label2: "Dette kan konfigureres.",
-    searchPlaceholder: "Søk på plan id"
+    searchPlaceholder: "Søk på plan id eller adresse",
+    reguleringsplaner: "Reguleringsplaner",
+    kommuneplaner: "Kommuneplaner",
+    addresses: "Addresser"
   }),
   "ar": 0,
   "cs": 0,

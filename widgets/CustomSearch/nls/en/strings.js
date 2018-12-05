@@ -3,7 +3,10 @@ define({
     _widgetLabel: "Demo",
     label1: "I am a demo widget.",
     label2: "This is configurable.",
-    searchPlaceholder: "Search for plan id"
+    searchPlaceholder: "Search for plan id or address",
+    reguleringsplaner: "Zoning plans",
+    kommuneplaner: "Municipal master plan",
+    addresses: "Addresses"
   }),
   "ar": 0,
   "cs": 0,

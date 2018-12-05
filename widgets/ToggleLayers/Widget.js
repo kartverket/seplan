@@ -187,32 +187,44 @@ function(declare, lang, BaseWidget, watchUtils) {
     initClickEvents: function() {
       var that = this;
       this.toggleStatusPlanRegister.onclick = function() {
-        that.changeCssClasses(that.toggleStatusPlanRegister);
-        that.toggleLayers.dekningKommuneplaner.active = false;
-        that.toggleLayers.dekningReguleringsplaner.active = false;
-        that.toggleLayers.statusPlanregister.active = true;
-        that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
-        that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
-        that.showAndHideKpOmraade(that.sceneView.scale);
+        that.switchToStatusPlanRegister();
       }
       this.toggleReguleringsplaner.onclick = function() {
-        that.changeCssClasses(that.toggleReguleringsplaner);
-        that.toggleLayers.dekningKommuneplaner.active = false;
-        that.toggleLayers.dekningReguleringsplaner.active = true;
-        that.toggleLayers.statusPlanregister.active = false;
-        that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
-        that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
-        that.showAndHideKpOmraade(that.sceneView.scale);
+        that.switchToReguleringsplaner();
       }
       this.toggleKommuneplaner.onclick = function() {
-        that.changeCssClasses(that.toggleKommuneplaner);
-        that.toggleLayers.dekningKommuneplaner.active = true;
-        that.toggleLayers.dekningReguleringsplaner.active = false;
-        that.toggleLayers.statusPlanregister.active = false;
-        that.showAndHidePlanRegisterStatusLayers(that.sceneView.scale);
-        that.showAndHidePlanOmraadeLayers(that.sceneView.scale);
-        that.showAndHideKpOmraade(that.sceneView.scale);
+        that.switchToKommuneplaner();
       }
+    },
+
+    switchToStatusPlanRegister: function() {
+      this.changeCssClasses(this.toggleStatusPlanRegister);
+      this.toggleLayers.dekningKommuneplaner.active = false;
+      this.toggleLayers.dekningReguleringsplaner.active = false;
+      this.toggleLayers.statusPlanregister.active = true;
+      this.showAndHidePlanRegisterStatusLayers(this.sceneView.scale);
+      this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
+      this.showAndHideKpOmraade(this.sceneView.scale);
+    },
+
+    switchToReguleringsplaner: function() {
+      this.changeCssClasses(this.toggleReguleringsplaner);
+      this.toggleLayers.dekningKommuneplaner.active = false;
+      this.toggleLayers.dekningReguleringsplaner.active = true;
+      this.toggleLayers.statusPlanregister.active = false;
+      this.showAndHidePlanRegisterStatusLayers(this.sceneView.scale);
+      this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
+      this.showAndHideKpOmraade(this.sceneView.scale);
+    },
+
+    switchToKommuneplaner: function() {
+      this.changeCssClasses(this.toggleKommuneplaner);
+      this.toggleLayers.dekningKommuneplaner.active = true;
+      this.toggleLayers.dekningReguleringsplaner.active = false;
+      this.toggleLayers.statusPlanregister.active = false;
+      this.showAndHidePlanRegisterStatusLayers(this.sceneView.scale);
+      this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
+      this.showAndHideKpOmraade(this.sceneView.scale);
     },
 
     // Triggered every time the map scale is finished changing
