@@ -1,5 +1,15 @@
 {
-  "allPlaceholder": "",
+  "allPlaceholder": "yes",
   "showInfoWindowOnSelect": true,
-  "sources":[]
+  "sources":[{
+  	"type": "query",
+  	"url": "https://services.arcgis.com/nztDqZeWZcC0Y8dx/arcgis/rest/services/KpOmrade/FeatureServer/0",
+  	"displayField": "plannavn",
+  	"searchFields": ["plannavn"],
+  	"exactMatch": false,
+  	"name": "Planer",
+  	"placeholder": "example: 201601",
+  	"maxResults": 6,
+  	"searchInCurrentMapExtent": false
+  }]
 }

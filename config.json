@@ -73,7 +73,22 @@
         "id": "widgets_Search_Widget_16",
         "url": "/webappbuilder/apps/8/widgets/Search/",
         "icon": "widgets/Search/images/icon.png",
-        "name": "Search"
+        "name": "Search",
+        "config": "configs/Search/config_Search.json",
+        "visible": false
+      },
+      {
+        "uri": "widgets/CustomSearch/Widget",
+        "position": {
+          "left": 51,
+          "top": 10,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_CustomSearch_Widget_40",
+        "url": "/webappbuilder/apps/8/widgets/CustomSearch/",
+        "icon": "widgets/CustomSearch/images/icon.png",
+        "name": "CustomSearch"
       },
       {
         "uri": "widgets/ZoomSlider/Widget",
@@ -303,8 +318,8 @@
     "loadingGif": {
       "visible": true,
       "uri": "configs/loading/images/loading.gif",
-      "width": 450,
-      "height": 71
+      "width": 765,
+      "height": 170
     }
   },
   "wabVersion": "2.6",

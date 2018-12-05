@@ -13,8 +13,8 @@
 	position: absolute;
 	background-image: url('images/loading.gif');
 	background-repeat: no-repeat;
-	width:450px;
-	height:71px;
+	width:765px;
+	height:170px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

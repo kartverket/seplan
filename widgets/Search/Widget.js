@@ -39,11 +39,12 @@ define([
     'esri/core/lang',
     'esri/symbols/PictureMarkerSymbol',
     './utils',
-    'dojo/NodeList-dom'
+    'dojo/NodeList-dom',
+    'esri/layers/FeatureLayer' // CUSTOM
   ],
   function(declare, lang, array, html, when, on, /*aspect,*/ query, keys, Deferred, all,
     BaseWidget, /*LayerInfos,*/ jimuUtils, Search, SearchViewModel, Locator,
-    /*FeatureLayer, InfoTemplate,*/ esriLang, PictureMarkerSymbol, utils) {
+    /*FeatureLayer, InfoTemplate,*/ esriLang, PictureMarkerSymbol, utils, FeatureLayer) {
     //To create a widget, you need to derive from BaseWidget.
     return declare([BaseWidget], {
       name: 'Search',
@@ -253,76 +254,76 @@ define([
           } else {
             def.resolve(null);
           }
-          // if (source && source.url && source.type === 'query') {
-          //   var searchLayer = new FeatureLayer(source.url || null, {
-          //     outFields: ["*"]
-          //   });
+          if (source && source.url && source.type === 'query') {
+            var searchLayer = new FeatureLayer(source.url || null, {
+              outFields: ["*"]
+            });
 
-          //   this.own(on(searchLayer, 'load', lang.hitch(this, function(result) {
-          //     var flayer = result.layer;
-          //     var template = this._getInfoTemplate(flayer, source, source.displayField);
-          //     var fNames = null;
-          //     if (source.searchFields && source.searchFields.length > 0) {
-          //       fNames = source.searchFields;
-          //     } else {
-          //       fNames = [];
-          //       array.forEach(flayer.fields, function(field) {
-          //         if (field.type !== "esriFieldTypeOID" && field.name !== flayer.objectIdField &&
-          //           field.type !== "esriFieldTypeGeometry") {
-          //           fNames.push(field.name);
-          //         }
-          //       });
-          //     }
-          //     var convertedSource = {
-          //       featureLayer: flayer,
-          //       outFields: ["*"],
-          //       searchFields: fNames,
-          //       displayField: source.displayField || "",
-          //       exactMatch: !!source.exactMatch,
-          //       name: jimuUtils.stripHTML(source.name || ""),
-          //       placeholder: jimuUtils.stripHTML(source.placeholder || ""),
-          //       maxResults: source.maxResults || 6,
-          //       infoTemplate: template,
-          //       useMapExtent: !!source.searchInCurrentMapExtent
-          //     };
-          //     if (!template) {
-          //       delete convertedSource.infoTemplate;
-          //     }
-          //     def.resolve(convertedSource);
-          //   })));
+            this.own(on(searchLayer, 'load', lang.hitch(this, function(result) {
+              var flayer = result.layer;
+              var template = this._getInfoTemplate(flayer, source, source.displayField);
+              var fNames = null;
+              if (source.searchFields && source.searchFields.length > 0) {
+                fNames = source.searchFields;
+              } else {
+                fNames = [];
+                array.forEach(flayer.fields, function(field) {
+                  if (field.type !== "esriFieldTypeOID" && field.name !== flayer.objectIdField &&
+                    field.type !== "esriFieldTypeGeometry") {
+                    fNames.push(field.name);
+                  }
+                });
+              }
+              var convertedSource = {
+                featureLayer: flayer,
+                outFields: ["*"],
+                searchFields: fNames,
+                displayField: source.displayField || "",
+                exactMatch: !!source.exactMatch,
+                name: jimuUtils.stripHTML(source.name || ""),
+                placeholder: jimuUtils.stripHTML(source.placeholder || ""),
+                maxResults: source.maxResults || 6,
+                infoTemplate: template,
+                useMapExtent: !!source.searchInCurrentMapExtent
+              };
+              if (!template) {
+                delete convertedSource.infoTemplate;
+              }
+              def.resolve(convertedSource);
+            })));
 
-          //   this.own(on(searchLayer, 'error', function() {
-          //     def.resolve(null);
-          //   }));
-          // } else {
-          //   def.resolve(null);
-          // }
+            this.own(on(searchLayer, 'error', function() {
+              def.resolve(null);
+            }));
+          } else {
+            def.resolve(null);
+          }
           return def;
         }));
 
         return sourceDefs;
       },
 
-      // _getInfoTemplate: function(fLayer, source, displayField) {
-      //   var layerInfo = this.layerInfosObj.getLayerInfoById(source.layerId);
-      //   var template = layerInfo && layerInfo.getInfoTemplate();
-      //   var validTemplate = layerInfo && template;
+      _getInfoTemplate: function(fLayer, source, displayField) {
+        var layerInfo = this.layerInfosObj.getLayerInfoById(source.layerId);
+        var template = layerInfo && layerInfo.getInfoTemplate();
+        var validTemplate = layerInfo && template;
 
-      //   if (layerInfo && !validTemplate) { // doesn't enabled pop-up
-      //     return null;
-      //   } else if (validTemplate) {
-      //     // configured media or attachments
-      //     return template;
-      //   } else { // (added by user in setting) or (only configured fieldInfo)
-      //     template = new InfoTemplate();
-      //     template.setTitle('&nbsp;');
-      //     template.setContent(
-      //       lang.hitch(this, '_formatContent', source.name, fLayer, displayField)
-      //     );
+        if (layerInfo && !validTemplate) { // doesn't enabled pop-up
+          return null;
+        } else if (validTemplate) {
+          // configured media or attachments
+          return template;
+        } else { // (added by user in setting) or (only configured fieldInfo)
+          template = new InfoTemplate();
+          template.setTitle('&nbsp;');
+          template.setContent(
+            lang.hitch(this, '_formatContent', source.name, fLayer, displayField)
+          );
 
-      //     return template;
-      //   }
-      // },
+          return template;
+        }
+      },
 
       _captureSelect: function(e) {
         var sourceIndex = this.searchDijit.viewModel.activeSourceIndex;
