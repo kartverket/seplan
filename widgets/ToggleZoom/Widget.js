@@ -26,8 +26,6 @@ function(declare, BaseWidget, Graphic, Extent) {
       
       this.initClickEvents();
 
-      console.log(this.sceneView);
-
       console.log('startup');
     },
 
@@ -68,7 +66,6 @@ function(declare, BaseWidget, Graphic, Extent) {
 
       this.dragEndEvent = this.sceneView.on('pointer-up', e => {
         if (extentGraphic) {
-          console.log(extentGraphic);
           this.sceneView.goTo(extentGraphic.geometry.extent);
           this.sceneView.graphics.remove(extentGraphic)
         }
@@ -90,15 +87,12 @@ function(declare, BaseWidget, Graphic, Extent) {
     },
 
     initClickEvents: function() {
-      console.log("uafafag");
       var that = this;
       this.toggleNormalZoom.onclick = function() {
-        console.log("pan");
         that.changeCssClasses(that.toggleNormalZoom);
         that.activateNormalZooming();
       }
       this.toggleZoomBox.onclick = function() {
-        console.log("zoombox");
         that.changeCssClasses(that.toggleZoomBox);
         that.activateZoomBox();
       }

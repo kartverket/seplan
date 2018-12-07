@@ -7,31 +7,40 @@
 			}],
 			"fieldInfos": [
 				{
-				"fieldName": "plannavn"
+					"fieldName": "plannavn",
+					"label": "Plannavn"
 				},
 				{
-				"fieldName": "planidenti"
+					"fieldName": "planidenti",
+					"label": "PlanID"
 				},
 				{
-				"fieldName": "plantype"
+					"fieldName": "plantype",
+					"label": "Plantype"
 				},
 				{
-				"fieldName": "planstatus"
+					"fieldName": "planstatus",
+					"label": "Planstatus"
 				},
 				{
-				"fieldName": "planbestem"
+					"fieldName": "planbestem",
+					"label": "Planbestemmelse"
 				},
 				{
-				"fieldName": "lovreferan"
+					"fieldName": "lovreferan",
+					"label": "Lovreferanse"
 				},
 				{
-				"fieldName": "ikraftred"
+					"fieldName": "ikraftred",
+					"label": "Ikrafttredelsesdato"
 				},
 				{
-				"fieldName": "oppdaterin"
+					"fieldName": "oppdaterin",
+					"label": "Oppdateringsdato"
 				},
 				{
-				"fieldName": "link"
+					"fieldName": "link",
+					"label": "Lenke til planen"
 				}
 			]
 		},
@@ -42,31 +51,40 @@
 			}],
 			"fieldInfos": [
 				{
-				"fieldName": "plannavn"
+					"fieldName": "plannavn",
+					"label": "Plannavn"
 				},
 				{
-				"fieldName": "planidenti"
+					"fieldName": "planidenti",
+					"label": "PlanID"
 				},
 				{
-				"fieldName": "plantype"
+					"fieldName": "plantype",
+					"label": "Plantype"
 				},
 				{
-				"fieldName": "planstatus"
+					"fieldName": "planstatus",
+					"label": "Planstatus"
 				},
 				{
-				"fieldName": "planbestem"
+					"fieldName": "planbestem",
+					"label": "Planbestemmelse"
 				},
 				{
-				"fieldName": "lovreferan"
+					"fieldName": "lovreferan",
+					"label": "Lovreferanse"
 				},
 				{
-				"fieldName": "ikraftred"
+					"fieldName": "ikraftred",
+					"label": "Ikrafttredelsesdato"
 				},
 				{
-				"fieldName": "oppdaterin"
+					"fieldName": "oppdaterin",
+					"label": "Oppdateringsdato"
 				},
 				{
-				"fieldName": "link"
+					"fieldName": "link",
+					"label": "Lenke til planen"
 				}
 			]
 		}

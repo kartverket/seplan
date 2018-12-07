@@ -70,10 +70,11 @@ function(declare, BaseWidget, Search, FeatureLayer, Locator, WidgetManager) {
       searchWidget.on("search-complete", function(event) {
         var widgetManager = WidgetManager.getInstance();
         var widget = widgetManager.getWidgetsByName("ToggleLayers")[0];
-        console.log(event.results[0]);
         if (event.results[0].source.name === "Kommuneplaner" || event.results[0].source.name === "Municipal master plan") {
           widget.switchToKommuneplaner();
-          console.log(event.results[0].results[0].feature.geometry);
+        }
+        else if (event.results[0].source.name === "Reguleringsplaner" || event.results[0].source.name === "Zoning plans") {
+          widget.switchToReguleringsplaner();
         }
       });
 
