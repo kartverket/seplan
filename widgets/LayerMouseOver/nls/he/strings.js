@@ -1,19 +1,14 @@
 ﻿define({
   root: ({
-    _widgetLabel: "Demo",
-    label1: "Jeg er en demowidget.",
-    label2: "Dette kan konfigureres.",
-    searchPlaceholder: "Søk på plan id eller adresse",
-    reguleringsplaner: "Reguleringsplaner",
-    kommuneplaner: "Kommuneplaner",
-    addresses: "Addresser og steder"
+    _widgetLabel: "הדגמה",
+    label1: "אני וידג\'ט להדגמה.",
+    label2: "זה ניתן להגדרה."
   }),
   "ar": 0,
   "cs": 0,
   "da": 0,
   "de": 0,
   "el": 0,
-  "en": 1,
   "es": 0,
   "et": 0,
   "fi": 0,
@@ -24,7 +19,7 @@
   "ko": 0,
   "lt": 0,
   "lv": 0,
-  "nb": 1,
+  "nb": 0,
   "nl": 0,
   "pl": 0,
   "pt-br": 0,

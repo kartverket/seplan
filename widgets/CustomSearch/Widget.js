@@ -40,17 +40,7 @@ function(declare, BaseWidget, Search, FeatureLayer, Locator, WidgetManager) {
           featureLayer: new FeatureLayer({
             url: "https://services.arcgis.com/nztDqZeWZcC0Y8dx/arcgis/rest/services/Kommuneplaner/FeatureServer/0",
             outFields: ["*"],
-            popupTemplate: {
-              title: "Kommuneplan(er)",
-              content: [{
-                type: "fields"
-              }],
-              fieldInfos: [{
-                fieldName: "planidenti"
-              }, {
-                fieldName: "plannavn"
-              }]
-            }
+            popupTemplate: that.config.popupTemplate.kommuneplaner
           }),
           searchFields: ["planidenti"],
           displayField: "planidenti",
@@ -64,17 +54,7 @@ function(declare, BaseWidget, Search, FeatureLayer, Locator, WidgetManager) {
           featureLayer: new FeatureLayer({
             url: "https://services.arcgis.com/nztDqZeWZcC0Y8dx/arcgis/rest/services/Reguleringsplaner/FeatureServer/0",
             outFields: ["*"],
-            popupTemplate: {
-              title: "Reguleringsplan(er)",
-              content: [{
-                type: "fields"
-              }],
-              fieldInfos: [{
-                fieldName: "planidenti"
-              }, {
-                fieldName: "plannavn"
-              }]
-            }
+            popupTemplate: that.config.popupTemplate.reguleringsplaner
           }),
           searchFields: ["planidenti"],
           displayField: "planidenti",
@@ -90,7 +70,8 @@ function(declare, BaseWidget, Search, FeatureLayer, Locator, WidgetManager) {
       searchWidget.on("search-complete", function(event) {
         var widgetManager = WidgetManager.getInstance();
         var widget = widgetManager.getWidgetsByName("ToggleLayers")[0];
-        if (event.results[0].source.name === "Kommuneplaner") {
+        console.log(event.results[0]);
+        if (event.results[0].source.name === "Kommuneplaner" || event.results[0].source.name === "Municipal master plan") {
           widget.switchToKommuneplaner();
           console.log(event.results[0].results[0].feature.geometry);
         }

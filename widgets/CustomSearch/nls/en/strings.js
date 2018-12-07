@@ -6,7 +6,7 @@ define({
     searchPlaceholder: "Search for plan id or address",
     reguleringsplaner: "Zoning plans",
     kommuneplaner: "Municipal master plan",
-    addresses: "Addresses"
+    addresses: "Addresses and places"
   }),
   "ar": 0,
   "cs": 0,

@@ -220,6 +220,19 @@
         "label": "ToggleZoom"
       },
       {
+        "uri": "widgets/LayerMouseOver/Widget",
+        "position": {
+          "left": 10,
+          "top": 180,
+          "relativeTo": "map"
+        },
+        "version": "2.6",
+        "id": "widgets_LayerMouseOver_Widget_50",
+        "url": "/webappbuilder/apps/8/widgets/LayerMouseOver/",
+        "name": "LayerMouseOver",
+        "label": "LayerMouseOver"
+      },
+      {
         "version": "2.6",
         "position": {
           "left": 30,

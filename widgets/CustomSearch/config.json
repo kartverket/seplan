@@ -1,3 +1,74 @@
 {
-	"configText":"abcdefg"
+	"popupTemplate": {
+		"kommuneplaner": {
+			"title": "Kommuneplan(er)",
+			"content": [{
+				"type": "fields"
+			}],
+			"fieldInfos": [
+				{
+				"fieldName": "plannavn"
+				},
+				{
+				"fieldName": "planidenti"
+				},
+				{
+				"fieldName": "plantype"
+				},
+				{
+				"fieldName": "planstatus"
+				},
+				{
+				"fieldName": "planbestem"
+				},
+				{
+				"fieldName": "lovreferan"
+				},
+				{
+				"fieldName": "ikraftred"
+				},
+				{
+				"fieldName": "oppdaterin"
+				},
+				{
+				"fieldName": "link"
+				}
+			]
+		},
+		"reguleringsplaner": {
+			"title": "Reguleringsplan(er)",
+			"content": [{
+				"type": "fields"
+			}],
+			"fieldInfos": [
+				{
+				"fieldName": "plannavn"
+				},
+				{
+				"fieldName": "planidenti"
+				},
+				{
+				"fieldName": "plantype"
+				},
+				{
+				"fieldName": "planstatus"
+				},
+				{
+				"fieldName": "planbestem"
+				},
+				{
+				"fieldName": "lovreferan"
+				},
+				{
+				"fieldName": "ikraftred"
+				},
+				{
+				"fieldName": "oppdaterin"
+				},
+				{
+				"fieldName": "link"
+				}
+			]
+		}
+	}
 }
