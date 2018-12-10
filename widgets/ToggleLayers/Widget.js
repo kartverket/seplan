@@ -1,5 +1,5 @@
-define(['dojo/_base/declare', 'dojo/_base/lang', 'jimu/BaseWidget', 'esri/core/watchUtils'],
-function(declare, lang, BaseWidget, watchUtils) {
+define(['dojo/_base/declare', 'dojo/_base/lang', 'jimu/BaseWidget', 'esri/core/watchUtils', 'esri/layers/GraphicsLayer'],
+function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
   //To create a widget, you need to derive from BaseWidget.
   return declare([BaseWidget], {
     //Please note that the widget depends on the 4.0 API
@@ -19,6 +19,12 @@ function(declare, lang, BaseWidget, watchUtils) {
     startup: function() {
       this.inherited(arguments);
 
+      this.rpOmraadeGraphicsLayer = null;
+      this.rpOmraadeVisible = false;
+
+      this.kpOmraadeGraphicsLayer = null;
+      this.kpOmraadeVisible = false;
+
       this.layerNames = {
         dekningKommuneplaner: "dekningKommuneplaner",
         dekningReguleringsplaner: "dekningReguleringsplaner",
@@ -33,8 +39,6 @@ function(declare, lang, BaseWidget, watchUtils) {
         eldreReguleringsPlan: "eldreReguleringsPlan",
         kommuneOgKommuneDelPlan: "kommuneOgKommuneDelPlan"
       };
-
-      console.log(this.sceneView.map);
 
       this.parentLayers = {
         planRegisterStatus: {
@@ -104,6 +108,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       this.initClickEvents();
       this.initZoomEvent();
       this.initResizeEvent();
+      this.initExtentChangeEventForRpOmraade();
+      this.initExtentChangeEventForKpOmraade();
 
       setTimeout(lang.hitch(this, function(){
         this.resizeButtons();
@@ -174,7 +180,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       for (var layerKey in this.toggleLayers) {
         var layer = this.toggleLayers[layerKey];
         if (layer.name === this.layerNames.dekningKommuneplaner) {
-          this.parentLayers.kpOmraade.ref.visible = (currentZoomLevel < 700000 && layer.active);
+          //this.parentLayers.kpOmraade.ref.visible = (currentZoomLevel < 700000 && layer.active);
+          this.kpOmraadeVisible = (currentZoomLevel < 700000 && layer.active);
         }
       }
     },
@@ -183,7 +190,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       for (var layerKey in this.toggleLayers) {
         var layer = this.toggleLayers[layerKey];
         if (layer.name === this.layerNames.dekningReguleringsplaner) {
-          this.parentLayers.rpOmraade.ref.visible = (currentZoomLevel < 15000 && layer.active);
+          //this.parentLayers.rpOmraade.ref.visible = (currentZoomLevel < 15000 && layer.active);
+          this.rpOmraadeVisible = (currentZoomLevel < 15000 && layer.active);
         }
       }
     },
@@ -221,6 +229,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
       this.showAndHideKpOmraade(this.sceneView.scale);
       this.showAndHideRpOmraade(this.sceneView.scale);
+      this.rpOmraadeExtentChangeCallback();
+      this.kpOmraadeExtentChangeCallback();
     },
 
     switchToReguleringsplaner: function() {
@@ -232,6 +242,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
       this.showAndHideKpOmraade(this.sceneView.scale);
       this.showAndHideRpOmraade(this.sceneView.scale);
+      this.rpOmraadeExtentChangeCallback();
+      this.kpOmraadeExtentChangeCallback();
     },
 
     switchToKommuneplaner: function() {
@@ -243,6 +255,8 @@ function(declare, lang, BaseWidget, watchUtils) {
       this.showAndHidePlanOmraadeLayers(this.sceneView.scale);
       this.showAndHideKpOmraade(this.sceneView.scale);
       this.showAndHideRpOmraade(this.sceneView.scale);
+      this.rpOmraadeExtentChangeCallback();
+      this.kpOmraadeExtentChangeCallback();
     },
 
     // Triggered every time the map scale is finished changing
@@ -288,6 +302,74 @@ function(declare, lang, BaseWidget, watchUtils) {
         for (var i = 0; i < buttons.length; i++) {
           buttons[i].style.display = "table-cell";
         } 
+      }
+    },
+
+    initExtentChangeEventForRpOmraade: function() {
+      var that = this;
+      setTimeout(function() {
+        that.rpOmraadeGraphicsLayer = new GraphicsLayer({
+          renderer: that.parentLayers.rpOmraade.ref.renderer.clone()
+        })
+
+        that.sceneView.map.add(that.rpOmraadeGraphicsLayer);
+
+        watchUtils.whenTrue(that.sceneView, "stationary", function() {
+          that.rpOmraadeExtentChangeCallback();
+        });
+      }, 500)
+    },
+
+    initExtentChangeEventForKpOmraade: function() {
+      var that = this;
+      setTimeout(function() {
+        that.kpOmraadeGraphicsLayer = new GraphicsLayer({
+          renderer: that.parentLayers.kpOmraade.ref.renderer.clone()
+        })
+
+        that.sceneView.map.add(that.kpOmraadeGraphicsLayer);
+
+        watchUtils.whenTrue(that.sceneView, "stationary", function() {
+          that.kpOmraadeExtentChangeCallback();
+        });
+      }, 500)
+    },
+
+    rpOmraadeExtentChangeCallback: function() {
+      var that = this;
+
+      if (that.rpOmraadeVisible) {
+        let query = that.parentLayers.rpOmraade.ref.createQuery();
+        query.geometry = that.sceneView.extent;
+        query.outFields = ['*'];
+        that.parentLayers.rpOmraade.ref.queryFeatures(query).then(featureSet => {
+          // clear graphics layer and add result of query
+          console.log(`${featureSet.features.length} features fetched`);
+          that.rpOmraadeGraphicsLayer.removeAll();
+          that.rpOmraadeGraphicsLayer.addMany(featureSet.features);
+        });
+      }
+      else {
+        that.rpOmraadeGraphicsLayer.removeAll();
+      }
+    },
+
+    kpOmraadeExtentChangeCallback: function() {
+      var that = this;
+      
+      if (that.kpOmraadeVisible) {
+        let query = that.parentLayers.kpOmraade.ref.createQuery();
+        query.geometry = that.sceneView.extent;
+        query.outFields = ['*'];
+        that.parentLayers.kpOmraade.ref.queryFeatures(query).then(featureSet => {
+          // clear graphics layer and add result of query
+          console.log(`${featureSet.features.length} features fetched`);
+          that.kpOmraadeGraphicsLayer.removeAll();
+          that.kpOmraadeGraphicsLayer.addMany(featureSet.features);
+        });
+      }
+      else {
+        that.kpOmraadeGraphicsLayer.removeAll();
       }
     },
 
