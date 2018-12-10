@@ -67,6 +67,10 @@
 					"label": "Planstatus"
 				},
 				{
+					"fieldName": "vertikalni",
+					"label": "Vertikalnivå"
+				},
+				{
 					"fieldName": "planbestem",
 					"label": "Planbestemmelse"
 				},
