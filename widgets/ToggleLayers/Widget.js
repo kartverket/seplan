@@ -342,9 +342,9 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         let query = that.parentLayers.rpOmraade.ref.createQuery();
         query.geometry = that.sceneView.extent;
         query.outFields = ['*'];
-        that.parentLayers.rpOmraade.ref.queryFeatures(query).then(featureSet => {
+        that.parentLayers.rpOmraade.ref.queryFeatures(query).then(function(featureSet) {
           // clear graphics layer and add result of query
-          console.log(`${featureSet.features.length} features fetched`);
+          console.log(featureSet.features.length + " features fetched");
           that.rpOmraadeGraphicsLayer.removeAll();
           that.rpOmraadeGraphicsLayer.addMany(featureSet.features);
         });
@@ -361,9 +361,9 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         let query = that.parentLayers.kpOmraade.ref.createQuery();
         query.geometry = that.sceneView.extent;
         query.outFields = ['*'];
-        that.parentLayers.kpOmraade.ref.queryFeatures(query).then(featureSet => {
+        that.parentLayers.kpOmraade.ref.queryFeatures(query).then(function(featureSet) {
           // clear graphics layer and add result of query
-          console.log(`${featureSet.features.length} features fetched`);
+          console.log(featureSet.features.length + " features fetched");
           that.kpOmraadeGraphicsLayer.removeAll();
           that.kpOmraadeGraphicsLayer.addMany(featureSet.features);
         });

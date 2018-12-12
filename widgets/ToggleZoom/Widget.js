@@ -39,16 +39,18 @@ function(declare, BaseWidget, Graphic, Extent) {
         }
       };
 
+      var that = this;
+
       var extentGraphic = null;
       var origin = null;
-      this.dragEvent = this.sceneView.on('drag', e => {
+      this.dragEvent = this.sceneView.on('drag', function(e) {
         e.stopPropagation();
         if (e.action === 'start'){
-          if (extentGraphic) this.sceneView.graphics.remove(extentGraphic)
-          origin = this.sceneView.toMap(e);
+          if (extentGraphic) that.sceneView.graphics.remove(extentGraphic)
+          origin = that.sceneView.toMap(e);
         } else if (e.action === 'update'){
-          if (extentGraphic) this.sceneView.graphics.remove(extentGraphic)
-          var p = this.sceneView.toMap(e); 
+          if (extentGraphic) that.sceneView.graphics.remove(extentGraphic)
+          var p = that.sceneView.toMap(e); 
           extentGraphic = new Graphic({
             geometry: new Extent({
               xmin: Math.min(p.x, origin.x),
@@ -60,14 +62,14 @@ function(declare, BaseWidget, Graphic, Extent) {
             symbol: fillSymbol
           })
           
-          this.sceneView.graphics.add(extentGraphic)
+          that.sceneView.graphics.add(extentGraphic)
         }
       });
 
-      this.dragEndEvent = this.sceneView.on('pointer-up', e => {
+      this.dragEndEvent = this.sceneView.on('pointer-up', function(e) {
         if (extentGraphic) {
-          this.sceneView.goTo(extentGraphic.geometry.extent);
-          this.sceneView.graphics.remove(extentGraphic)
+          that.sceneView.goTo(extentGraphic.geometry.extent);
+          that.sceneView.graphics.remove(extentGraphic)
         }
       });
     },
