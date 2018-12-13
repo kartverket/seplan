@@ -19,10 +19,6 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
     startup: function() {
       this.inherited(arguments);
 
-      // Millisekunder å vente før noen ting settes i gang.
-      // Forhindre at ting er klart før det brukes
-      this.delay = 1500;
-
       this.rpOmraadeGraphicsLayer = null;
       this.rpOmraadeVisible = false;
 
@@ -59,13 +55,23 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       this.initZoomEvent();
       this.initResizeEvent();
 
-      // Forsikre om at ting er klart
-      setTimeout(lang.hitch(this, function(){
-        this.initExtentChangeEventForRpOmraade();
-        this.initExtentChangeEventForKpOmraade();
+      this.sceneView.whenLayerView(this.parentLayers.rpOmraade.ref).then(lang.hitch(this, function(layerView) {
+        watchUtils.whenFalse(layerView, 'updating', lang.hitch(this, function() {
+          console.log("reguleringsplaner loaded!");
+          this.initExtentChangeEventForRpOmraade();
+        }));
+      }));
 
+      this.sceneView.whenLayerView(this.parentLayers.kpOmraade.ref).then(lang.hitch(this, function(layerView) {
+        watchUtils.whenFalse(layerView, 'updating', lang.hitch(this, function() {
+          console.log("kommuneplaner loaded!");
+          this.initExtentChangeEventForKpOmraade();
+        }));
+      }));
+
+      setTimeout(lang.hitch(this, function(){
         this.resizeButtons();
-      }), this.delay);
+      }), 500);
 
       console.log('startup');
     },
