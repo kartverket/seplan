@@ -1,5 +1,5 @@
-define(['dojo/_base/declare', 'jimu/BaseWidget'],
-function(declare, BaseWidget) {
+define(['dojo/_base/declare', 'jimu/BaseWidget', 'dojo/dom-construct'],
+function(declare, BaseWidget, domConstruct) {
   //To create a widget, you need to derive from BaseWidget.
   return declare([BaseWidget], {
     //Please note that the widget depends on the 4.0 API
@@ -20,14 +20,23 @@ function(declare, BaseWidget) {
       this.inherited(arguments);
 
       var that = this;
-      this.sceneView.on("click", function(event) {
+
+      var tooltip = domConstruct.create("div", { "class": "tooltip", "innerHTML": "testtesttesttesttesttest" }, this.sceneView.container);
+      tooltip.style.position = "absolute";
+
+      this.sceneView.on("pointer-move", function(event) {
         // the hitTest() checks to see if any graphics in the view
         // intersect the given screen x, y coordinates
         that.sceneView.hitTest(event)
           .then(function(response) {
-            console.log(response)
-            if (response.results.length > 0) {
-              // response.results.graphic er alltid null
+            if (response.results.length > 0 && response.results[0].graphic) {
+              tooltip.innerHTML = response.results[0].graphic.attributes.plannavn;
+              tooltip.style.display = "block";
+              tooltip.style.left = (event.x + 10) + "px";
+              tooltip.style.top = event.y + "px";
+            }
+            else {
+              tooltip.style.display = "none";
             }
         });      
       });

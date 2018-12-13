@@ -309,7 +309,14 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       var that = this;
       setTimeout(function() {
         that.rpOmraadeGraphicsLayer = new GraphicsLayer({
-          renderer: that.parentLayers.rpOmraade.ref.renderer.clone()
+          renderer: that.parentLayers.rpOmraade.ref.renderer.clone(),
+          elevationInfo: { 
+            mode: "absolute-height",
+            featureExpressionInfo: {
+              expression: "3"
+            },
+            unit: "meters" 
+          }
         })
 
         that.sceneView.map.add(that.rpOmraadeGraphicsLayer);
@@ -317,14 +324,21 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         watchUtils.whenTrue(that.sceneView, "stationary", function() {
           that.rpOmraadeExtentChangeCallback();
         });
-      }, 500)
+      }, 700)
     },
 
     initExtentChangeEventForKpOmraade: function() {
       var that = this;
       setTimeout(function() {
         that.kpOmraadeGraphicsLayer = new GraphicsLayer({
-          renderer: that.parentLayers.kpOmraade.ref.renderer.clone()
+          renderer: that.parentLayers.kpOmraade.ref.renderer.clone(),
+          elevationInfo: { 
+            mode: "absolute-height",
+            featureExpressionInfo: {
+              expression: "3"
+            },
+            unit: "meters" 
+          }
         })
 
         that.sceneView.map.add(that.kpOmraadeGraphicsLayer);
@@ -332,7 +346,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         watchUtils.whenTrue(that.sceneView, "stationary", function() {
           that.kpOmraadeExtentChangeCallback();
         });
-      }, 500)
+      }, 700)
     },
 
     rpOmraadeExtentChangeCallback: function() {
