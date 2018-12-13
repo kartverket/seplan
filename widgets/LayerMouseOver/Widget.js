@@ -31,7 +31,7 @@ function(declare, BaseWidget, domConstruct, GraphicsLayer, Polygon, SimpleFillSy
       this.sceneView.map.add(highLightGraphicsLayer);
 
       var highlightSymbol = new SimpleFillSymbol({
-        color: [160, 216, 239, 0.4],
+        color: [0, 255, 255, 0.5],
         style: 'solid',
         outline: {
           color: [0, 255, 255],
