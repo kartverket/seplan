@@ -40,78 +40,22 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         kommuneOgKommuneDelPlan: "kommuneOgKommuneDelPlan"
       };
 
-      this.parentLayers = {
-        planRegisterStatus: {
-          ref: this.sceneView.map.layers.items[0],
-          name: this.layerNames.planRegisterStatus
-        },
-        planOmraade: {
-          ref: this.sceneView.map.layers.items[1],
-          name: this.layerNames.planOmraade
-        },
-        rpOmraade: {
-          ref: this.sceneView.map.layers.items[2],
-          name: this.layerNames.rpOmraade
-        },
-        kpOmraade: {
-          ref: this.sceneView.map.layers.items[3],
-          name: this.layerNames.kpOmraade
-        }
-      }
-
-      this.additionalLayers = {
-        detaljRegulering: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[7],
-          name: this.layerNames.detaljRegulering
-        },
-        omraadeRegulering: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[6],
-          name: this.layerNames.omraadeRegulering
-        },
-        bebyggelsesPlan: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[5],
-          name: this.layerNames.bebyggelsesPlan
-        },
-        eldreReguleringsPlan: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[4],
-          name: this.layerNames.eldreReguleringsPlan
-        },
-        kommuneOgKommuneDelPlan: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[3],
-          name: this.layerNames.kommuneOgKommuneDelPlan
-        }
-      };
-
-      this.toggleLayers = {
-        dekningKommuneplaner: {
-          ref: this.sceneView.map.layers.items[0].sublayers.items[2],
-          name: this.layerNames.dekningKommuneplaner,
-          active: false
-        },
-        dekningReguleringsplaner: {
-          ref: this.sceneView.map.layers.items[0].sublayers.items[1],
-          name: this.layerNames.dekningReguleringsplaner,
-          active: true
-        },
-        statusPlanregister: {
-          ref: this.sceneView.map.layers.items[0].sublayers.items[0],
-          name: this.layerNames.statusPlanregister,
-          active: false
-        }
-      };
       this.toggleStatusPlanRegister.innerHTML = this.nls.root.statusPlanregister;
       this.toggleReguleringsplaner.innerHTML = this.nls.root.reguleringsplaner;
       this.toggleKommuneplaner.innerHTML = this.nls.root.kommuneplaner;
 
       this.changeCssClasses(this.toggleReguleringsplaner);
 
-      this.initClickEvents();
-      this.initZoomEvent();
-      this.initResizeEvent();
-      this.initExtentChangeEventForRpOmraade();
-      this.initExtentChangeEventForKpOmraade();
-
+      // Forsikre om at ting er klart
       setTimeout(lang.hitch(this, function(){
+        this.initLayers();
+
+        this.initClickEvents();
+        this.initZoomEvent();
+        this.initResizeEvent();
+        this.initExtentChangeEventForRpOmraade();
+        this.initExtentChangeEventForKpOmraade();
+
         this.resizeButtons();
       }), 500);
 
@@ -307,46 +251,42 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
     initExtentChangeEventForRpOmraade: function() {
       var that = this;
-      setTimeout(function() {
-        that.rpOmraadeGraphicsLayer = new GraphicsLayer({
-          renderer: that.parentLayers.rpOmraade.ref.renderer.clone(),
-          elevationInfo: { 
-            mode: "absolute-height",
-            featureExpressionInfo: {
-              expression: "3"
-            },
-            unit: "meters" 
-          }
-        })
+      that.rpOmraadeGraphicsLayer = new GraphicsLayer({
+        renderer: that.parentLayers.rpOmraade.ref.renderer.clone(),
+        elevationInfo: { 
+          mode: "absolute-height",
+          featureExpressionInfo: {
+            expression: "5"
+          },
+          unit: "meters" 
+        }
+      })
 
-        that.sceneView.map.add(that.rpOmraadeGraphicsLayer);
+      that.sceneView.map.add(that.rpOmraadeGraphicsLayer);
 
-        watchUtils.whenTrue(that.sceneView, "stationary", function() {
-          that.rpOmraadeExtentChangeCallback();
-        });
-      }, 700)
+      watchUtils.whenTrue(that.sceneView, "stationary", function() {
+        that.rpOmraadeExtentChangeCallback();
+      });
     },
 
     initExtentChangeEventForKpOmraade: function() {
       var that = this;
-      setTimeout(function() {
-        that.kpOmraadeGraphicsLayer = new GraphicsLayer({
-          renderer: that.parentLayers.kpOmraade.ref.renderer.clone(),
-          elevationInfo: { 
-            mode: "absolute-height",
-            featureExpressionInfo: {
-              expression: "3"
-            },
-            unit: "meters" 
-          }
-        })
+      that.kpOmraadeGraphicsLayer = new GraphicsLayer({
+        renderer: that.parentLayers.kpOmraade.ref.renderer.clone(),
+        elevationInfo: { 
+          mode: "absolute-height",
+          featureExpressionInfo: {
+            expression: "5"
+          },
+          unit: "meters" 
+        }
+      })
 
-        that.sceneView.map.add(that.kpOmraadeGraphicsLayer);
+      that.sceneView.map.add(that.kpOmraadeGraphicsLayer);
 
-        watchUtils.whenTrue(that.sceneView, "stationary", function() {
-          that.kpOmraadeExtentChangeCallback();
-        });
-      }, 700)
+      watchUtils.whenTrue(that.sceneView, "stationary", function() {
+        that.kpOmraadeExtentChangeCallback();
+      });
     },
 
     rpOmraadeExtentChangeCallback: function() {
@@ -385,6 +325,68 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       else {
         that.kpOmraadeGraphicsLayer.removeAll();
       }
+    },
+
+    initLayers: function() {
+      this.parentLayers = {
+        planRegisterStatus: {
+          ref: this.sceneView.map.layers.items[0],
+          name: this.layerNames.planRegisterStatus
+        },
+        planOmraade: {
+          ref: this.sceneView.map.layers.items[1],
+          name: this.layerNames.planOmraade
+        },
+        rpOmraade: {
+          ref: this.sceneView.map.layers.items[2],
+          name: this.layerNames.rpOmraade
+        },
+        kpOmraade: {
+          ref: this.sceneView.map.layers.items[3],
+          name: this.layerNames.kpOmraade
+        }
+      }
+
+      this.additionalLayers = {
+        detaljRegulering: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[7],
+          name: this.layerNames.detaljRegulering
+        },
+        omraadeRegulering: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[6],
+          name: this.layerNames.omraadeRegulering
+        },
+        bebyggelsesPlan: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[5],
+          name: this.layerNames.bebyggelsesPlan
+        },
+        eldreReguleringsPlan: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[4],
+          name: this.layerNames.eldreReguleringsPlan
+        },
+        kommuneOgKommuneDelPlan: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[3],
+          name: this.layerNames.kommuneOgKommuneDelPlan
+        }
+      };
+
+      this.toggleLayers = {
+        dekningKommuneplaner: {
+          ref: this.sceneView.map.layers.items[0].sublayers.items[2],
+          name: this.layerNames.dekningKommuneplaner,
+          active: false
+        },
+        dekningReguleringsplaner: {
+          ref: this.sceneView.map.layers.items[0].sublayers.items[1],
+          name: this.layerNames.dekningReguleringsplaner,
+          active: true
+        },
+        statusPlanregister: {
+          ref: this.sceneView.map.layers.items[0].sublayers.items[0],
+          name: this.layerNames.statusPlanregister,
+          active: false
+        }
+      };
     },
 
     onOpen: function(){
