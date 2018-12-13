@@ -19,6 +19,10 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
     startup: function() {
       this.inherited(arguments);
 
+      // Millisekunder å vente før noen ting settes i gang.
+      // Forhindre at ting er klart før det brukes
+      this.delay = 1500;
+
       this.rpOmraadeGraphicsLayer = null;
       this.rpOmraadeVisible = false;
 
@@ -46,18 +50,22 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
       this.changeCssClasses(this.toggleReguleringsplaner);
 
+      this.initLayers();
+
+      console.log(this.parentLayers.rpOmraade.ref);
+      console.log(this.parentLayers.kpOmraade.ref);
+
+      this.initClickEvents();
+      this.initZoomEvent();
+      this.initResizeEvent();
+
       // Forsikre om at ting er klart
       setTimeout(lang.hitch(this, function(){
-        this.initLayers();
-
-        this.initClickEvents();
-        this.initZoomEvent();
-        this.initResizeEvent();
         this.initExtentChangeEventForRpOmraade();
         this.initExtentChangeEventForKpOmraade();
 
         this.resizeButtons();
-      }), 500);
+      }), this.delay);
 
       console.log('startup');
     },
