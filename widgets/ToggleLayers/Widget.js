@@ -109,7 +109,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       for (var layerKey in this.toggleLayers) {
         var layer = this.toggleLayers[layerKey];
         if (layer.name === this.layerNames.dekningKommuneplaner) {
-          this.additionalLayers.kommuneOgKommuneDelPlan.ref.visible = (currentZoomLevel > 700000 && currentZoomLevel < 1200000 && layer.active);
+          this.additionalLayers.kommuneOgKommuneDelPlan.ref.visible = (currentZoomLevel >= 700000 && currentZoomLevel < 1200000 && layer.active);
         }
         else if (layer.name === this.layerNames.dekningReguleringsplaner) {
           this.additionalLayers.detaljRegulering.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
@@ -386,7 +386,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
       this.toggleLayers = {
         dekningKommuneplaner: {
-          ref: this.sceneView.map.layers.items[0].sublayers.items[2],
+          ref: this.sceneView.map.layers.items[0].sublayers.items[0],
           name: this.layerNames.dekningKommuneplaner,
           active: false
         },
@@ -396,7 +396,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
           active: true
         },
         statusPlanregister: {
-          ref: this.sceneView.map.layers.items[0].sublayers.items[0],
+          ref: this.sceneView.map.layers.items[0].sublayers.items[2],
           name: this.layerNames.statusPlanregister,
           active: false
         }
