@@ -1,4 +1,4 @@
-{
+﻿{
   "theme": {
     "name": "JewelryBoxTheme",
     "styles": [
@@ -22,7 +22,7 @@
     }
   },
   "portalUrl": "http://kartverket.maps.arcgis.com",
-  "appId": "",
+  "appId": "dfLBxIzFqoQeQDk5",
   "authorizedCrossOriginDomains": [],
   "title": "SePlan",
   "subtitle": "with Web AppBuilder for ArcGIS",
@@ -30,6 +30,7 @@
   "logo": "images/logo.png",
   "httpProxy": {
     "useProxy": true,
+    "alwaysUseProxy": false,
     "url": "https://localhost:3344/proxy.js"
   },
   "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",

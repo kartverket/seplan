@@ -93,7 +93,7 @@ var
   var apiVersion = '4.5';
   ////////uncomment the following line when downloading the app
 
-  //apiUrl = 'https://js.arcgis.com/4.5';
+  apiUrl = 'https://js.arcgis.com/4.5';
 
   //////////////////////////////////////////////////////////////
   allCookies = getAllCookies();

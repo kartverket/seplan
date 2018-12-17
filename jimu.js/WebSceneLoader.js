@@ -132,7 +132,7 @@ define([
               if (widget && widget.declaredClass === "esri.widgets.Attribution") {
                 widget.domNode.parentNode.style.width = "100%";
                 html.create("span", {
-                  "innerHTML": "Powered by Esri",
+                  "innerHTML": "",
                   "class": "esri-attribution-powered-by"
                 }, widget.domNode);
                 return true;
