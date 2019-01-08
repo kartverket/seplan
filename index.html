@@ -82,6 +82,12 @@
       .jimu-subtitle.jimu-float-leading.jimu-leading-margin5{
         display: none !important;
       }
+	  .loading{
+      position: absolute;
+      top: 50%;
+	  left: 50%;
+	  display: none;
+    }
 		</style>
     <link rel="stylesheet" type="text/css" href="configs/loading/loading.css" />
 		<script>
@@ -132,7 +138,8 @@
 		<div id="main-page">
 			<div id="jimu-layout-manager"></div>
 		</div>
-
+		<div id="loadingDiv" class="loading"><img src="images/loading2.gif"/></div>
+		
 		<script src="env.js"></script>
 		<script type="text/javascript" src="simpleLoader.js"></script>
 		<script type="text/javascript" src="init.js"></script>

@@ -24,7 +24,8 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
       this.kpOmraadeGraphicsLayer = null;
       this.kpOmraadeVisible = false;
-
+	  
+	  
       this.layerNames = {
         dekningKommuneplaner: "dekningKommuneplaner",
         dekningReguleringsplaner: "dekningReguleringsplaner",
@@ -33,11 +34,14 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         planOmraade: "planOmraade",
         kpOmraade: "kpOmraade",
         rpOmraade: "rpOmraade",
-        detaljRegulering: "detaljRegulering",
-        omraadeRegulering: "omraadeRegulering",
-        bebyggelsesPlan: "bebyggelsesPlan",
-        eldreReguleringsPlan: "eldreReguleringsPlan",
-        kommuneOgKommuneDelPlan: "kommuneOgKommuneDelPlan"
+		nasjonaleForventninger: "nasjonaleForventninger",
+		statligArealplan: "statligArealplan",
+		regionalPlan: "regionalPlan",
+		kommuneOgKommuneDelPlan: "kommuneOgKommuneDelPlan",
+		eldreReguleringsPlan: "eldreReguleringsPlan",
+		bebyggelsesPlan: "bebyggelsesPlan",
+		omraadeRegulering: "omraadeRegulering",
+        detaljRegulering: "detaljRegulering"
       };
 
       this.toggleStatusPlanRegister.innerHTML = this.nls.root.statusPlanregister;
@@ -54,6 +58,13 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       this.initClickEvents();
       this.initZoomEvent();
       this.initResizeEvent();
+	  var loading = document.getElementById("loadingDiv");
+	  this.sceneView.watch('updating', function(evt){
+        if(evt === true){
+          loading.style.display = 'block';
+        }else{
+          loading.style.display = 'none';
+	  }})
 
       this.sceneView.whenLayerView(this.parentLayers.rpOmraade.ref).then(lang.hitch(this, function(layerView) {
         watchUtils.whenFalse(layerView, 'updating', lang.hitch(this, function() {
@@ -109,13 +120,16 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       for (var layerKey in this.toggleLayers) {
         var layer = this.toggleLayers[layerKey];
         if (layer.name === this.layerNames.dekningKommuneplaner) {
-          this.additionalLayers.kommuneOgKommuneDelPlan.ref.visible = (currentZoomLevel >= 700000 && currentZoomLevel < 1200000 && layer.active);
+          this.additionalLayers.kommuneOgKommuneDelPlan.ref.visible = (currentZoomLevel > 450000 && currentZoomLevel < 1200000 && layer.active);
         }
         else if (layer.name === this.layerNames.dekningReguleringsplaner) {
           this.additionalLayers.detaljRegulering.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
           this.additionalLayers.omraadeRegulering.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
           this.additionalLayers.bebyggelsesPlan.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
           this.additionalLayers.eldreReguleringsPlan.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
+		  this.additionalLayers.nasjonaleForventninger.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
+		  this.additionalLayers.statligArealplan.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
+		  this.additionalLayers.regionalPlan.ref.visible = (currentZoomLevel > 15000 && currentZoomLevel < 200000 && layer.active);
         }
       }
       noVisibleLayers = true;
@@ -139,7 +153,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         var layer = this.toggleLayers[layerKey];
         if (layer.name === this.layerNames.dekningKommuneplaner) {
           //this.parentLayers.kpOmraade.ref.visible = (currentZoomLevel < 700000 && layer.active);
-          this.kpOmraadeVisible = (currentZoomLevel < 700000 && layer.active);
+          this.kpOmraadeVisible = (currentZoomLevel < 450000 && layer.active);
         }
       }
     },
@@ -265,6 +279,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
     initExtentChangeEventForRpOmraade: function() {
       var that = this;
+	  
       that.rpOmraadeGraphicsLayer = new GraphicsLayer({
         renderer: that.parentLayers.rpOmraade.ref.renderer.clone(),
         elevationInfo: { 
@@ -277,7 +292,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
       })
 
       that.sceneView.map.add(that.rpOmraadeGraphicsLayer);
-
+	  
       watchUtils.whenTrue(that.sceneView, "stationary", function() {
         that.rpOmraadeExtentChangeCallback();
       });
@@ -305,7 +320,7 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
 
     rpOmraadeExtentChangeCallback: function() {
       var that = this;
-
+	  
       if (that.rpOmraadeVisible) {
         let query = that.parentLayers.rpOmraade.ref.createQuery();
         query.geometry = that.sceneView.extent;
@@ -375,11 +390,23 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
           name: this.layerNames.bebyggelsesPlan
         },
         eldreReguleringsPlan: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[4],
+          ref: this.sceneView.map.layers.items[1].sublayers.items[3],
           name: this.layerNames.eldreReguleringsPlan
         },
+		nasjonaleForventninger: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[0],
+          name: this.layerNames.nasjonaleForventninger
+        },
+		statligArealplan: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[1],
+          name: this.layerNames.statligArealplan
+        },
+		regionalPlan: {
+          ref: this.sceneView.map.layers.items[1].sublayers.items[2],
+          name: this.layerNames.regionalPlan
+        },
         kommuneOgKommuneDelPlan: {
-          ref: this.sceneView.map.layers.items[1].sublayers.items[3],
+          ref: this.sceneView.map.layers.items[1].sublayers.items[4],
           name: this.layerNames.kommuneOgKommuneDelPlan
         }
       };
@@ -402,7 +429,8 @@ function(declare, lang, BaseWidget, watchUtils, GraphicsLayer) {
         }
       };
     },
-
+	
+	
     onOpen: function(){
       console.log('onOpen');
     },
