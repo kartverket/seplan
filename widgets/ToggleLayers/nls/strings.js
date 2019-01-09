@@ -3,7 +3,7 @@ define({
     _widgetLabel: "ToggleLayers",
     label1: "I am a demo widget.",
     label2: "This is configurable.",
-    statusPlanregister: "Status planning register",
+    statusPlanregister: "Status geosync",
     reguleringsplaner: "Zoning plans",
     kommuneplaner: "Municipal master plan"
   }),

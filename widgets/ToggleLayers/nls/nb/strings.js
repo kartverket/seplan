@@ -3,7 +3,7 @@
     _widgetLabel: "Lagbytte",
     label1: "Jeg er en demowidget.",
     label2: "Dette kan konfigureres.",
-    statusPlanregister: "Status planregister",
+    statusPlanregister: "Status geosynkronisering",
     reguleringsplaner: "Reguleringsplaner",
     kommuneplaner: "Kommuneplaner"
   }),
