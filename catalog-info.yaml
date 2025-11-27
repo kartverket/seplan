@@ -1,38 +1,11 @@
-# nonk8s
-apiVersion: "backstage.io/v1alpha1"
-kind: "Component"
+apiVersion: backstage.io/v1alpha1
+kind: Component
 metadata:
-  name: "seplan"
+  name: seplan
   tags:
-  - "public"
+    - public
 spec:
-  type: "website"
-  lifecycle: "production"
-  owner: "datadeling_og_distribusjon"
-  system: "seplan"
----
-apiVersion: "backstage.io/v1alpha1"
-kind: "Group"
-metadata:
-  name: "security_champion_seplan"
-  title: "Security Champion seplan"
-spec:
-  type: "security_champion"
-  parent: "land_security_champions"
-  members:
-  - "henrik716"
-  children:
-  - "resource:seplan"
----
-apiVersion: "backstage.io/v1alpha1"
-kind: "Resource"
-metadata:
-  name: "seplan"
-  links:
-  - url: "https://github.com/kartverket/seplan"
-    title: "seplan på GitHub"
-spec:
-  type: "repo"
-  owner: "security_champion_seplan"
-  dependencyOf:
-  - "component:seplan"
+  type: website
+  lifecycle: production
+  owner: datadeling_og_distribusjon
+  system: seplan
