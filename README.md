@@ -1,4 +1,4 @@
-# seplan
+# ⛔️ DEPRECATED - Seplan.no (Geonorge)
 
 ## Deployment
 
